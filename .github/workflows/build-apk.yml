@@ -1,0 +1,42 @@
+---
+name: Build - Debug APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - m3-expressive-overhaul
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-apk:
+    name: Build - Thunderbird debug APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+
+      - name: Cleanup disk
+        uses: ./.github/actions/disk-cleanup
+
+      - name: Setup Gradle environment
+        uses: ./.github/actions/setup-gradle
+
+      - name: Assemble debug APK
+        run: ./gradlew :app-thunderbird:assembleFossDebug -Pminify=false
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: thunderbird-m3e-debug-apk
+          path: app-thunderbird/build/outputs/apk/**/*.apk
+          if-no-files-found: error

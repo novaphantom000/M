@@ -12,4 +12,21 @@
         <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:background">?attr/colorSurfaceContainer</item>
     </style>
+
+    <!-- Material 3 Expressive shape scale for XML (Material Components) widgets -->
+    <style name="ShapeAppearance.App.Expressive.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.Expressive.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.Expressive.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
 </resources>
